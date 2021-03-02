@@ -53,3 +53,7 @@ CATKIN_IGNORE
 # IDE configure file
 .vscode
 .idea
+
+#intermediate output
+exps/
+datasets/
