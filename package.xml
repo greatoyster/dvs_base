@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>dvs_base</name>
+  <version>0.0.0</version>
+  <description>The dvs_base package</description>
+  <maintainer email="yangjq@shanghaitech.edu.cn">yangjq</maintainer>
+  <license>GPLv3</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+  <depend>glog_catkin</depend>
+  <depend>gflags_catkin</depend>
+  <depend>minkindr</depend>
+  <depend>minkindr_conversions</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_geometry</depend>
+  <export> </export>
+</package>
