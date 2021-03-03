@@ -1,5 +1,9 @@
 #ifndef DVS_BASE_IO
 #define DVS_BASE_IO
+#include <boost/foreach.hpp>
+#include <rosbag/bag.h>
+#include <rosbag/view.h>
+#include <vector>
 namespace dvs_base
 {
 
@@ -15,5 +19,31 @@ namespace dvs_base
         event_packet.load(fin);
     }
 
+    template <typename MsgType>
+    void loadMsgFromBag(std::vector<MsgType> &vec, const char *rosbag, const char *topic_name)
+    {
+        auto bag = rosbag::Bag(rosbag, rosbag::bagmode::Read);
+        if (!bag.isOpen())
+        {
+            std::cerr << "Can not open bag file!" << std::endl;
+        }
+        std::vector<std::string> topics;
+        std::string topic = topic_name;
+        topics.push_back(topic);
+        rosbag::View view(bag, rosbag::TopicQuery(topics));
+
+        BOOST_FOREACH (rosbag::MessageInstance const m, view)
+        {
+            const std::string &current_topic_name = m.getTopic();
+            if (topic_name == current_topic_name)
+            {
+                typename MsgType::ConstPtr msg = m.instantiate<MsgType>();
+                if (msg != NULL)
+                {
+                    vec.push_back(*msg);
+                }
+            }
+        };
+    }
 }
 #endif

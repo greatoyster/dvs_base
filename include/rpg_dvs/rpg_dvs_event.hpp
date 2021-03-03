@@ -74,7 +74,7 @@ namespace rpg_dvs
                         }
                     }
                 }
-            };
+            }
         };
     };
 }

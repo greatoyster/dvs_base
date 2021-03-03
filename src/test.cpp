@@ -29,7 +29,8 @@ int main(int argc, char **argv)
 
     auto t1 = std::chrono::high_resolution_clock::now();
 
-    
+    std::vector<dvs_msgs::EventArray> vec;
+    dvs_base::loadMsgFromBag(vec,rosbag.c_str(),"/dvs/events");
 
     auto t2 = std::chrono::high_resolution_clock::now();
 
