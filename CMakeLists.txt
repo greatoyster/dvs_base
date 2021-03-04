@@ -14,7 +14,10 @@ set(HEADERS
     include/dvs_base/dvs_base_event.hpp
     include/dvs_base/dvs_base_exp_sys.hpp
     include/dvs_base/dvs_base_io.hpp
+    include/dvs_base/dvs_base_quat_transform.hpp
+    include/dvs_base/dvs_base_io.hpp
     include/dvs_base/dvs_base_representation.hpp
+    include/dvs_base/dvs_base_trajectory.hpp
     include/dvs_base/dvs_base_visualization.hpp
     include/dvs_base/dvs_base.hpp
 
@@ -27,11 +30,8 @@ set(SOURCES
 
 find_package(OpenCV 3 REQUIRED)
 
-cs_add_library(${PROJECT_NAME} ${HEADERS} src/useless.cpp)
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
-
-cs_add_executable(test01  ${SOURCES})
-target_link_libraries(test01 ${PROJECT_NAME})
+cs_add_executable(test01 ${HEADERS} ${SOURCES})
+target_link_libraries(test01 ${OpenCV_LIBS})
 
 cs_install()
 cs_export()

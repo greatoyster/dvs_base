@@ -39,3 +39,11 @@ repositories:
     type: git
     url: https://github.com/ethz-asl/numpy_eigen.git
     version: master
+  ceres_catkin:
+    type: git
+    url: https://github.com/ethz-asl/ceres_catkin.git
+    version: master
+  suitesparse:
+    type: git
+    url: https://github.com/ethz-asl/suitesparse.git
+    version: master

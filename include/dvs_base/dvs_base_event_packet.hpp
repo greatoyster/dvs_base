@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <Eigen/Eigen>
+#include <memory>
+
 namespace dvs_base
 {
     /* Three main types of event packet: Eigen matrix, vector<vector<Scalar>>, dvs_msgs::EventArray */
@@ -14,6 +16,7 @@ namespace dvs_base
         /* Event packet traits */
         typedef Container ContainerType;
         typedef Event EventType;
+        typedef std::shared_ptr<EventPacketBase<ContainerType, EventType>> Ptr;
         /* Common interfaces */
         EventPacketBase() = default;
         EventPacketBase(ContainerType packet) : packet_(packet){};
@@ -36,13 +39,14 @@ namespace dvs_base
         /* Event packet traits */
         typedef std::vector<Event> ContainerType;
         typedef Event EventType;
+        typedef std::shared_ptr<EventPacketBase<ContainerType, EventType>> Ptr;
         /* Common interfaces */
         EventPacketBase() = default;
         EventPacketBase(ContainerType packet) : packet_(packet){};
         EventType operator[](size_t index) { return packet_.at(index); };
         size_t size() { return packet_.size(); };
-        virtual void load(const char *fin) {};
-        virtual void load(const char *rosbag, const char *topic_name) {};
+        virtual void load(const char *fin){};
+        virtual void load(const char *rosbag, const char *topic_name){};
         /* Event acess by traits */
         typename EventType::TimestampType ts(size_t index) { return packet_[index].ts(); };
         typename EventType::CoordType xs(size_t index) { return packet_[index].x(); };
@@ -59,13 +63,14 @@ namespace dvs_base
         /* Event packet traits */
         typedef Eigen::MatrixXd ContainerType;
         typedef Eigen::Vector4d EventType;
+        typedef std::shared_ptr<EventPacketBase<ContainerType, EventType>> Ptr;
         /* Common interfaces */
         EventPacketBase() = default;
         EventPacketBase(ContainerType packet) : packet_(packet){};
         size_t size() { return packet_.cols(); };
         EventType operator[](size_t index) { return packet_.block<4, 1>(0, index); };
-        virtual void load(const char *fin) {};
-        virtual void load(const char *rosbag, const char *topic_name) {};
+        virtual void load(const char *fin){};
+        virtual void load(const char *rosbag, const char *topic_name){};
         /* Event acess by traits */
         Scalar ts(size_t index) { return packet_(0, index); };
         Scalar xs(size_t index) { return packet_(1, index); };

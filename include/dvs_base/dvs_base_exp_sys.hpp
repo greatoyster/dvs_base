@@ -14,9 +14,9 @@ namespace dvs_base
 
         void setRootDir(const char *root)
         {
-            root_dir_ = root;
             using namespace boost::filesystem;
-            CHECK(exists(root_dir_)) << "Project root dir is not exist: " << root_dir_.string();
+            root_dir_ = root;
+            CHECK(exists(root_dir_)) << "Project root directory does not exist: " << root_dir_.string();
             boost::filesystem::path exps_path = root_dir_;
             exps_path.append("exps");
             LOG(INFO) << root_dir_.string();

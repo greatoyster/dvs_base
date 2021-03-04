@@ -11,6 +11,7 @@ namespace dvs_base
         typedef Ts TimestampType;
         typedef Coord CoordType;
         typedef Polarity PolarityType;
+        typedef std::shared_ptr<EventBase<TimestampType, CoordType, PolarityType>> Ptr;
         /* Trait interface */
         EventBase() = default;
         EventBase(Ts ts, Coord x, Coord y, Polarity polarity) : ts_(ts), x_(x), y_(y), polarity_(polarity){};

@@ -43,7 +43,37 @@ namespace dvs_base
                     vec.push_back(*msg);
                 }
             }
-        };
+        }
+        bag.close();
+    }
+    template <typename MsgType>
+    std::vector<MsgType> loadMsgFromBag(const char *rosbag, const char *topic_name)
+    {
+        std::vector<MsgType> vec;
+        auto bag = rosbag::Bag(rosbag, rosbag::bagmode::Read);
+        if (!bag.isOpen())
+        {
+            std::cerr << "Can not open bag file!" << std::endl;
+        }
+        std::vector<std::string> topics;
+        std::string topic = topic_name;
+        topics.push_back(topic);
+        rosbag::View view(bag, rosbag::TopicQuery(topics));
+
+        BOOST_FOREACH (rosbag::MessageInstance const m, view)
+        {
+            const std::string &current_topic_name = m.getTopic();
+            if (topic_name == current_topic_name)
+            {
+                typename MsgType::ConstPtr msg = m.instantiate<MsgType>();
+                if (msg != NULL)
+                {
+                    vec.push_back(*msg);
+                }
+            }
+        }
+        bag.close();
+        return vec;
     }
 }
 #endif
