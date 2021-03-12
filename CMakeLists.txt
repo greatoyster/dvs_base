@@ -10,6 +10,7 @@ find_package(catkin_simple REQUIRED)
 catkin_simple(ALL_DEPS_REQUIRED)
 
 set(HEADERS 
+    include/dvs_base/dvs_base_camera.hpp
     include/dvs_base/dvs_base_event_packet.hpp
     include/dvs_base/dvs_base_event.hpp
     include/dvs_base/dvs_base_exp_sys.hpp

@@ -11,7 +11,6 @@ namespace dvs_base
     template <typename EventPacket, typename Scalar, int Height, int Width>
     Eigen::Matrix<Scalar, Height, Width> accumulatedEvents(EventPacket &packet);
 
-
 }
 
 #endif

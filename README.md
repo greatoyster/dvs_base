@@ -24,9 +24,7 @@ Some **generic** and relatively **stable** code about event-based vision from da
 
 - Embedded visualization code in C++ and related RViz plugin
 
-# Finished Part
-
- Installation
+# Installation
 
 ```shell
 mkdir -p catkin_ws/src
